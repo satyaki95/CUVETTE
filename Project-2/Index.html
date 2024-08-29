@@ -1,25 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar">
-        <h1>DAPPR</h1>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About US</a></li>
-            <li><a href="#">Information</a></li>
-            <li><a href="#">More</a><img src="./images/arow.png" alt=""></li>
-        </ul>
-        <input type="text">
-        <img src="" alt="">
+      <h1 class="navbar-brand">Dappr</h1>
+      <ul class="navbar-menu">
+        <li class="navbar-item"><a href="#" class="navbar-link">Home</a></li>
+        <li class="navbar-item">
+          <a href="#" class="navbar-link">About Us</a>
+        </li>
+        <li class="navbar-item">
+          <a href="#" class="navbar-link">Information</a>
+        </li>
+        <li class="navbar-item">
+          <a href="#" class="navbar-link">More</a
+          ><img
+            src="./images/arow.png"
+            alt="Dropdown arrow"
+            class="dropdown-arrow"
+          />
+        </li>
+      </ul>
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search..." />
+        <img src="./images/search.png" alt="Search icon" class="search-icon" />
+      </div>
+      <div class="more-container">
+        <img
+          src="./images/more.png"
+          alt="More options icon"
+          class="more-icon"
+        />
+      </div>
     </nav>
-    <div class="container">
-        
+    <div class="main-container">
+      <div class="image-container">
+        <img src="./images/image.png" alt="Main image" />
+      </div>
+      <div class="textarea-container">
+        <textarea
+          class="styled-textarea"
+          placeholder="Enter your text here..."
+        ></textarea>
+      </div>
+      <div class="social-icons">
+        <img src="./images/whatsapp.png" alt="WhatsApp icon" />
+        <img src="./images/facebook.png" alt="Facebook icon" />
+        <img src="./images/twitter.png" alt="Twitter icon" />
+      </div>
     </div>
-</body>
+    <div class="cards-container">
+      <div class="card">
+        <h3 class="card-title">Total Questions</h3>
+        <p class="card-content">200,000</p>
+      </div>
+      <div class="card" style="background-color: #8666f3">
+        <h3 class="card-title">Total Answers</h3>
+        <p class="card-content">150,000</p>
+      </div>
+      <div class="card" style="background-color: #d388fe">
+        <h3 class="card-title">Total Users</h3>
+        <p class="card-content">75,000</p>
+      </div>
+      <div class="card" style="background-color: #000">
+        <h3 class="card-title">Active Users</h3>
+        <p class="card-content">10,000</p>
+      </div>
+    </div>
+    <div class="section-container">
+      <div class="menu-section">
+        <div class="menu-card highlighted-menu-card">
+          <h3>YOUR INFO</h3>
+        </div>
+        <div class="menu-card">
+          <h3>BOOKMARKS</h3>
+        </div>
+        <div class="menu-card">
+          <h3>SETTINGS</h3>
+        </div>
+      </div>
+      <div class="content-section">
+        <h2>Your Information</h2>
+        <div class="info-item">
+          <h3>Name</h3>
+          <span>: Atul Singhal</span>
+        </div>
+        <div class="info-item">
+          <h3>Email</h3>
+          <span>: atul@example.com</span>
+        </div>
+        <div class="info-item">
+          <h3>Phone</h3>
+          <span>: +1234567890</span>
+        </div>
+        <div class="info-item">
+          <h3>Address</h3>
+          <span>: 123 Main St, Anytown</span>
+        </div>
+        <button class="info-button">Next--></button>
+      </div>
+    </div>
+    <div class="floating-help-icon">
+      <img src="./images/help.png" alt="Help icon" />
+    </div>
+  </body>
 </html>
