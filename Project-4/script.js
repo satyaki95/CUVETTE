@@ -7,6 +7,7 @@ setTimeout(() => {
 const btnRules = document.querySelector(".rules-btn");
 const btnClose = document.querySelector(".close-btn");
 const modalRules = document.querySelector(".modal");
+const nextBtn = document.querySelector(".next");
 
 const CHOICES = [
   {
@@ -60,13 +61,11 @@ function aiChoose() {
 
 function displayResults(results) {
   resultDivs.forEach((resultDiv, idx) => {
-    setTimeout(() => {
       resultDiv.innerHTML = `
           <div class="choice ${results[idx].name}">
             <img src="images/icon-${results[idx].name}.svg" alt="${results[idx].name}" />
           </div>
         `;
-    }, idx * 1000);
   });
 
   gameDiv.classList.toggle("hidden");
@@ -81,7 +80,7 @@ function displayWinner(results) {
     if (userWins) {
       resultText.innerText = "you win";
       resultDivs[0].classList.toggle("winner");
-       myScore(1);
+      myScore(1);
     } else if (aiWins) {
       resultText.innerText = "you lose";
       resultDivs[1].classList.toggle("winner");
@@ -101,11 +100,25 @@ function isWinner(results) {
 function keepScore(point) {
   score += point;
   scoreNumber.innerText = score;
+  if (myscore == score) {
+    nextBtn.style.opacity = "0";
+  }
+  localStorage.setItem("aiData", score);
 }
 function myScore(point) {
   myscore += point;
-  myScoreNumber.innerText = myscore; 
+  myScoreNumber.innerText = myscore;
+  if (myscore > score) {
+    nextBtn.style.opacity = "1";
+  } else {
+    nextBtn.style.opacity = "0";
+  }
+  localStorage.setItem("myData", myscore);
 }
+
+nextBtn.addEventListener("click", () => {
+  window.open("./winer.html", "_self");
+});
 
 // Play Again
 playAgainBtn.addEventListener("click", () => {
@@ -129,3 +142,17 @@ btnRules.addEventListener("click", () => {
 btnClose.addEventListener("click", () => {
   modalRules.classList.toggle("show-modal");
 });
+
+
+
+const showData = () => {
+  scoreNumber.innerText = localStorage.getItem("aiData") || 0;
+
+  myScoreNumber.innerText = localStorage.getItem("myData") || 0;
+
+  if( localStorage.getItem("myData") >  localStorage.getItem("aiData") ){
+    nextBtn.style.opacity = "1";
+  }
+
+};
+showData();

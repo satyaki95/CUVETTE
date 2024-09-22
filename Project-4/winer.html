@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+<link rel="stylesheet" href="winer.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="trophy">
+          <img src="./images/winer.svg" alt="Trophy Icon">
+      </div>
+      <h1 class="title">HURRAY!!</h1>
+      <p class="subtitle">YOU WON THE GAME</p>
+      <button class="play-again">PLAY AGAIN</button>
+  </div>
+    <button class="rules-btn" tabindex="1">rules</button>
+    <div class="modal">
+      <button class="close-btn">
+        <img src="./images/icon-close.svg" alt="Close Button" />
+      </button>
+      <div class="modal__container">
+        <header class="modal__header">
+          <h2 class="modal__heading">Game rules</h2>
+        </header>
+        <div class="modal__body">
+          <ul>
+            <li>
+              <p>
+                Rock beats scissors, scissors beat paper, and paper beats rock.
+              </p>
+            </li>
+            <li>
+              <p>
+                Agree ahead of time whether you'll count off "rock, paper,
+                scissors, shoot" or just "rock, paper, scissors."
+              </p>
+            </li>
+            <li>
+              <p>
+                Use rock, paper, scissors to settle minor decisionss or simply
+                play to pass the time
+              </p>
+            </li>
+            <li>
+              <p>
+                If both players lay down the same hand, eaach player lays down
+                another hand
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const btnRules = document.querySelector(".rules-btn");
+      const btnClose = document.querySelector(".close-btn");
+      const modalRules = document.querySelector(".modal");
+      const playAgain = document.querySelector(".play-again");
+
+      btnRules.addEventListener("click", () => {
+        modalRules.classList.toggle("show-modal");
+      });
+      btnClose.addEventListener("click", () => {
+        modalRules.classList.toggle("show-modal");
+      });
+
+      playAgain.addEventListener("click", () => {
+        window.open("./index.html", "_self");
+      });
+    </script>
+  </body>
+</html>
