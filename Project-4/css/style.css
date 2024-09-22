@@ -99,7 +99,7 @@ body {
   height: 100%;
   left: 28%;
   top: 35%;
-  background: url("./images/bg-triangle.svg") no-repeat;
+  background: url("../images/bg-triangle.svg") no-repeat;
   z-index: -1;
 }
 
