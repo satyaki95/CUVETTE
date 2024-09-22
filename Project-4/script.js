@@ -33,7 +33,10 @@ const resultText = document.querySelector(".results__text");
 const playAgainBtn = document.querySelector(".play-again");
 
 const scoreNumber = document.querySelector(".score__number");
+const myScoreNumber = document.querySelector(".myscore__number");
+
 let score = 0;
+let myscore = 0;
 
 // Game Logic
 choiceButtons.forEach((button) => {
@@ -78,11 +81,11 @@ function displayWinner(results) {
     if (userWins) {
       resultText.innerText = "you win";
       resultDivs[0].classList.toggle("winner");
-      keepScore(1);
+       myScore(1);
     } else if (aiWins) {
       resultText.innerText = "you lose";
       resultDivs[1].classList.toggle("winner");
-      keepScore(-1);
+      keepScore(1);
     } else {
       resultText.innerText = "draw";
     }
@@ -98,6 +101,10 @@ function isWinner(results) {
 function keepScore(point) {
   score += point;
   scoreNumber.innerText = score;
+}
+function myScore(point) {
+  myscore += point;
+  myScoreNumber.innerText = myscore; 
 }
 
 // Play Again
