@@ -1,28 +1,12 @@
 // Prevent animation on load
-setTimeout(() => {
-  document.body.classList.remove("preload");
-}, 500);
+setTimeout(() => document.body.classList.remove("preload"), 500);
 
-// DOM
+// DOM Elements
 const btnRules = document.querySelector(".rules-btn");
 const btnClose = document.querySelector(".close-btn");
 const modalRules = document.querySelector(".modal");
 const nextBtn = document.querySelector(".next");
 
-const CHOICES = [
-  {
-    name: "paper",
-    beats: "rock",
-  },
-  {
-    name: "scissors",
-    beats: "paper",
-  },
-  {
-    name: "rock",
-    beats: "scissors",
-  },
-];
 const choiceButtons = document.querySelectorAll(".choice-btn");
 const gameDiv = document.querySelector(".game");
 const resultsDiv = document.querySelector(".results");
@@ -36,123 +20,121 @@ const playAgainBtn = document.querySelector(".play-again");
 const scoreNumber = document.querySelector(".score__number");
 const myScoreNumber = document.querySelector(".myscore__number");
 
-let score = 0;
-let myscore = 0;
+let score = Number(localStorage.getItem("aiData")) || 0;
+let myscore = Number(localStorage.getItem("myData")) || 0;
+
+// Choices array
+const CHOICES = [
+  { name: "paper", beats: "rock" },
+  { name: "scissors", beats: "paper" },
+  { name: "rock", beats: "scissors" },
+];
+
+// Initialize scores
+updateScores();
+
+// Event Listeners
+choiceButtons.forEach((button) =>
+  button.addEventListener("click", () => {
+    const userChoice = CHOICES.find((choice) => choice.name === button.dataset.choice);
+    playGame(userChoice);
+  })
+);
+
+playAgainBtn.addEventListener("click", resetGame);
+
+btnRules.addEventListener("click", () => modalRules.classList.add("show-modal"));
+btnClose.addEventListener("click", () => modalRules.classList.remove("show-modal"));
+
+nextBtn.addEventListener("click", () => window.open("./winer.html", "_self"));
 
 // Game Logic
-choiceButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const choiceName = button.dataset.choice;
-    const choice = CHOICES.find((choice) => choice.name === choiceName);
-    choose(choice);
-  });
-});
+function playGame(userChoice) {
+  const aiChoice = aiChoose();
+  const results = [userChoice, aiChoice];
 
-function choose(choice) {
-  const aichoice = aiChoose();
-  displayResults([choice, aichoice]);
-  displayWinner([choice, aichoice]);
+  displayResults(results);
+  determineWinner(results);
 }
 
 function aiChoose() {
-  const rand = Math.floor(Math.random() * CHOICES.length);
-  return CHOICES[rand];
+  return CHOICES[Math.floor(Math.random() * CHOICES.length)];
 }
 
 function displayResults(results) {
   resultDivs.forEach((resultDiv, idx) => {
-      resultDiv.innerHTML = `
-          <div class="choice ${results[idx].name}">
-            <img src="images/icon-${results[idx].name}.svg" alt="${results[idx].name}" />
-          </div>
-        `;
+    resultDiv.innerHTML = `
+      <div class="choice ${results[idx].name}">
+        <img src="images/icon-${results[idx].name}.svg" alt="${results[idx].name}" />
+      </div>
+    `;
   });
-
-  gameDiv.classList.toggle("hidden");
-  resultsDiv.classList.toggle("hidden");
+  toggleGameDisplay();
 }
 
-function displayWinner(results) {
+function determineWinner([userChoice, aiChoice]) {
   setTimeout(() => {
-    const userWins = isWinner(results);
-    const aiWins = isWinner(results.reverse());
+    const userWins = userChoice.beats === aiChoice.name;
+    const aiWins = aiChoice.beats === userChoice.name;
 
     if (userWins) {
-      resultText.innerText = "you win";
-      resultDivs[0].classList.toggle("winner");
-      myScore(1);
+      resultText.innerText = "You win!";
+      resultDivs[0].classList.add("winner");
+      updateScore("user");
     } else if (aiWins) {
-      resultText.innerText = "you lose";
-      resultDivs[1].classList.toggle("winner");
-      keepScore(1);
+      resultText.innerText = "You lose!";
+      resultDivs[1].classList.add("winner");
+      updateScore("ai");
     } else {
-      resultText.innerText = "draw";
+      resultText.innerText = "It's a draw!";
     }
-    resultWinner.classList.toggle("hidden");
-    resultsDiv.classList.toggle("show-winner");
+
+    showWinner();
   }, 1000);
 }
 
-function isWinner(results) {
-  return results[0].beats === results[1].name;
-}
-
-function keepScore(point) {
-  score += point;
-  scoreNumber.innerText = score;
-  if (myscore == score) {
-    nextBtn.style.opacity = "0";
-  }
-  localStorage.setItem("aiData", score);
-}
-function myScore(point) {
-  myscore += point;
-  myScoreNumber.innerText = myscore;
-  if (myscore > score) {
-    nextBtn.style.opacity = "1";
+function updateScore(winner) {
+  if (winner === "user") {
+    myscore++;
+    localStorage.setItem("myData", myscore);
   } else {
-    nextBtn.style.opacity = "0";
+    score++;
+    localStorage.setItem("aiData", score);
   }
-  localStorage.setItem("myData", myscore);
+
+  updateScores();
 }
 
-nextBtn.addEventListener("click", () => {
-  window.open("./winer.html", "_self");
-});
+function updateScores() {
+  scoreNumber.innerText = score;
+  myScoreNumber.innerText = myscore;
 
-// Play Again
-playAgainBtn.addEventListener("click", () => {
-  gameDiv.classList.toggle("hidden");
-  resultsDiv.classList.toggle("hidden");
+  nextBtn.style.opacity = myscore > score ? "1" : "0";
+}
 
+function resetGame() {
   resultDivs.forEach((resultDiv) => {
     resultDiv.innerHTML = "";
     resultDiv.classList.remove("winner");
   });
 
   resultText.innerText = "";
-  resultWinner.classList.toggle("hidden");
-  resultsDiv.classList.toggle("show-winner");
-});
+  hideWinner();
+  toggleGameDisplay();
+}
 
-// Show/Hide Rules
-btnRules.addEventListener("click", () => {
-  modalRules.classList.toggle("show-modal");
-});
-btnClose.addEventListener("click", () => {
-  modalRules.classList.toggle("show-modal");
-});
+// Utility Functions
+function toggleGameDisplay() {
+  gameDiv.classList.toggle("hidden");
+  resultsDiv.classList.toggle("hidden");
+}
 
+function showWinner() {
+  resultWinner.classList.remove("hidden");
+  resultsDiv.classList.add("show-winner");
+}
 
-
-const showData = () => {
-  scoreNumber.innerText = localStorage.getItem("aiData") || 0;
-
-  myScoreNumber.innerText = localStorage.getItem("myData") || 0;
-
-  if( localStorage.getItem("myData") >  localStorage.getItem("aiData") ){
-    nextBtn.style.opacity = "1";
-  }
-
-};
-showData();
+function hideWinner() {
+  resultWinner.classList.add("hidden");
+  resultsDiv.classList.remove("show-winner");
+}

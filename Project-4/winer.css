@@ -17,7 +17,7 @@
   --shadow-med: #0000004d;
 }
 
-/* Basic resets */
+
 * {
     margin: 0;
     padding: 0;
@@ -30,7 +30,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #8bc45f; /* Green background */
+    background-color: #8bc45f; 
 }
 
 .container {
@@ -126,7 +126,6 @@ body {
 .modal__heading {
   font-size: 1.5rem;
   color: var(--light-text);
-  /* margin-left: -159px; */
   z-index: 1;
 }
 
