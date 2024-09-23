@@ -1,7 +1,6 @@
-// Prevent animation on load
 setTimeout(() => document.body.classList.remove("preload"), 500);
 
-// DOM Elements
+
 const btnRules = document.querySelector(".rules-btn");
 const btnClose = document.querySelector(".close-btn");
 const modalRules = document.querySelector(".modal");
@@ -23,17 +22,17 @@ const myScoreNumber = document.querySelector(".myscore__number");
 let score = Number(localStorage.getItem("aiData")) || 0;
 let myscore = Number(localStorage.getItem("myData")) || 0;
 
-// Choices array
+
 const CHOICES = [
   { name: "paper", beats: "rock" },
   { name: "scissors", beats: "paper" },
   { name: "rock", beats: "scissors" },
 ];
 
-// Initialize scores
+
 updateScores();
 
-// Event Listeners
+
 choiceButtons.forEach((button) =>
   button.addEventListener("click", () => {
     const userChoice = CHOICES.find((choice) => choice.name === button.dataset.choice);
@@ -48,7 +47,7 @@ btnClose.addEventListener("click", () => modalRules.classList.remove("show-modal
 
 nextBtn.addEventListener("click", () => window.open("./winer.html", "_self"));
 
-// Game Logic
+
 function playGame(userChoice) {
   const aiChoice = aiChoose();
   const results = [userChoice, aiChoice];
@@ -123,7 +122,7 @@ function resetGame() {
   toggleGameDisplay();
 }
 
-// Utility Functions
+
 function toggleGameDisplay() {
   gameDiv.classList.toggle("hidden");
   resultsDiv.classList.toggle("hidden");

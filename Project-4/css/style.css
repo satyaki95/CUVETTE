@@ -1,7 +1,6 @@
-/* Font */
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap");
 
-/* Variables */
+
 :root {
   --light-text: #ffffff;
   --dark-text: #3b4363;
@@ -32,7 +31,7 @@ body {
   overflow: hidden;
 }
 
-/* Main Content */
+
 .container {
   position: relative;
   max-width: 700px;
@@ -80,7 +79,7 @@ body {
   color: var(--dark-text);
 }
 
-/* Game */
+
 .game {
   position: relative;
   display: grid;
@@ -154,7 +153,6 @@ body {
   grid-area: rock;
 }
 
-/* Results */
 .results {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -240,7 +238,7 @@ body {
   border: 2px solid var(--outline);
 }
 
-/* Rules Button */
+
 .rules-btn {
   position: absolute;
   bottom: 5rem;
@@ -261,7 +259,7 @@ body {
   border: 2px solid #fff;
 }
 
-/* Rules Modal */
+
 .modal {
   font-family: sans-serif;
   font-weight: 100;
@@ -291,7 +289,6 @@ body {
 .modal__heading {
   font-size: 1.5rem;
   color: var(--light-text);
-  /* margin-left: -159px; */
   z-index: 1;
 }
 
@@ -318,7 +315,7 @@ body {
   pointer-events: initial;
 }
 
-/* Utilities */
+
 .preload * {
   transition: none;
 }
@@ -341,4 +338,7 @@ body {
   font-size: 1rem;
   cursor: pointer;
   opacity: 0;
+}
+.next:focus {
+  border: 2px solid #fff;
 }

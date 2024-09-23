@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap");
 
-/* Variables */
+
 :root {
   --light-text: #ffffff;
   --dark-text: #3b4363;
@@ -46,7 +46,7 @@ body {
 
 }
 
-/* Title styling */
+
 .title {
     font-size: 50px;
     color: white;
@@ -54,14 +54,14 @@ body {
     margin-bottom: 10px;
 }
 
-/* Subtitle styling */
+
 .subtitle {
     font-size: 24px;
     color: white;
     margin-bottom: 20px;
 }
 
-/* Button styling */
+
 .play-again, .rules {
     background-color: white;
     border: none;
